@@ -1,7 +1,7 @@
 class Solution(object):
     def longestCommonPrefix(self, strs):
         size = len(strs)
-        print(strs)
+        #print(strs)
 
         if (size == 0):
             return ""
@@ -11,8 +11,9 @@ class Solution(object):
 
         end = len(strs[0])
         for s in strs:
-            if len(s) < end:
-                end = len(s)
+            length = len(s)
+            if length < end:
+                end = length
 
         # print(end)
         if (end == 0 or end == None):
@@ -23,19 +24,19 @@ class Solution(object):
         
         for i in range(0,end):
             wordCount = 1
-            print(firstWord[i]) 
+            #print(firstWord[i]) 
             for j in range(1, size):
                 nextWord = strs[j]
-                print(nextWord[i])
+                #print(nextWord[i])
                 if(firstWord[i] == nextWord[i]):
                     wordCount = wordCount + 1
-                    print(wordCount)
+                    #print(wordCount)
                 else:
                     return output
             if (wordCount == len(strs)):  
-                print(firstWord[i])      
+                #print(firstWord[i])      
                 output = output + firstWord[i]
-            return output
+        return output
         
 
 object = Solution()
