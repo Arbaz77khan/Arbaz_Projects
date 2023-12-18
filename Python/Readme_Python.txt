@@ -520,3 +520,18 @@ Virtual Environment: An environment which is same as system interpreter but is i
 				
 			To install packages from requirement.txt, command is pip install -r requirement.txt
 					
+DS Algo Python: 
+
+Data structure : It is a way to store and organized data efficiently.
+				Need : In Programming there are some problems which are difficult to solve. It can be efficiently solved using DS.
+				
+	Two Types : Linear and Non Linear
+	
+	Linear : Array, Linked list, Stacks, Queue, Hashing
+	Non Liner : Trees, Graphs
+	
+	Arrays : It is Linear data structure which is used to store multiple items of same type in continues memory location.
+			Disadvantage : 1. Fixed size (Memory Wastage)
+						   2. Homogenuous (different types can't be store)(lack of flexibility)
+						   
+		Lists are the referencial array i.e lists stores the addresses of heterogenuous data in sequential manner.
