@@ -464,8 +464,9 @@ Funtions: It is a block of code which we can reuse in future programming.
 						return 1
 					else
 						return n*funct1(n-1)   -> function calling itself.
+						
 				
-Common in-built functions:		(note : all below function does not change the original variable. It will create another variable)
+	Common in-built functions:		(note : all below function does not change the original variable. It will create another variable)
 
 		len(), max(), min(), sorted('arbaz'),
 		s = 'hello world'
@@ -484,6 +485,21 @@ Common in-built functions:		(note : all below function does not change the origi
 		" ".join(['hello', 'world']) -> will join the list with the space if " ". if "-" it will add - between two words.
 		s.replace('world', 'boy') -> will replace world with boy.
 		s.strip() -> will remove all spaces from string.
+		
+Lambda function: Its a small anonymous Function created using an expression using lambda keyword.
+				Syntax :
+							funcnName = lambda arguments: expressions    -> can be used as normal function.
+				example:
+							square = lambda x: X*X
+							square(6)    ---> return 36
+							
+							sum = lambda a, b, c: a+b+c
+							sum(1, 2, 3)   ----> return 6
+		diff between lamda and normal function :
+						No name to function.( we only use keyword lamda)
+						lamda has no return value. (i.e it will return a function itself instead on none)
+						lamda is written in 1 line
+						not reusable		
 		
 					
 Files : Files is the data stored in a storage device. A pyhton file can read or write file content.
@@ -763,20 +779,7 @@ List comprehensions:
 
 						list2 = [i for item in list1 if item > 70]
 						
-Lambda function: Its a small anonymous Function created using an expression using lambda keyword.
-				Syntax :
-							funcnName = lambda arguments: expressions    -> can be used as normal function.
-				example:
-							square = lambda x: X*X
-							square(6)    ---> return 36
-							
-							sum = lambda a, b, c: a+b+c
-							sum(1, 2, 3)   ----> return 6
-		diff between lamda and normal function :
-						No name to function.( we only use keyword lamda)
-						lamda has no return value. (i.e it will return a function itself instead on none)
-						lamda is written in 1 line
-						not reusable
+
 							
 join function: It makes the sentence of words present in list/ tupple.
 								E.g. :
