@@ -671,7 +671,26 @@ OOPs Concepts :	Object oriented programming is a way that is used for efficiency
 												@classmethod
 												def change( cls, p1, p2):     -> instead of self we use cls here.
 														......
-														
+				Encapsulation : 
+								Encapsulation is one of the fundamental principles of object-oriented programming (OOP) that promotes the bundling of data (attributes) and methods (functions) that operate on the data into a single unit known as a class. In Python, encapsulation is achieved through the use of classes and access modifiers.
+
+								The key concepts of encapsulation are:
+
+								Public, Protected, and Private Attributes:
+
+										Public attributes/methods: Accessible from anywhere, both inside and outside the class.
+										Protected attributes/methods: Accessible within the class and its subclasses (denoted by a single leading underscore _).
+										Private attributes/methods: Accessible only within the class (denoted by a double leading underscore __).
+										
+								While it is technically possible to access private attributes using name mangling (_ClassName__private_attribute), it's generally discouraged as it goes against the principle of encapsulation.
+					
+					***	keep in mind that Python does not provide true "private" attributes as can still access private with _classname__xyz.
+								
+								Property and Setter Methods:
+
+								Property methods allow you to define getter methods for attributes, controlling how they are accessed.
+								Setter methods provide controlled access to modify attribute values.
+							
 					Getters and Setters : 
 											These are the decorators which are used to dynamically modify the attributes in class.
 								1. Getter uses @property decorater to create dynamic attributes. 
