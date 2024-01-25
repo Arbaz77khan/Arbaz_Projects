@@ -518,12 +518,16 @@ Files : Files is the data stored in a storage device. A pyhton file can read or 
 					+ : Open for updating
 			closing File : file.close()
 			
+				For Binay file, we use : rb -> read , wb -> write
+			
 			Reading file : data = file.read() - will read full file
 					Multiple ways:
-							data = file.read(2) - will read 2 characters form file.
+							data = file.read(2) - will read 2 characters form file. If want full content -> empty ()
 							data = file.readline() - will read 1 line form file. If need another line add this code again.
 							
-			Writing in file : file.write("This is written in write mode of python")  This can be written in multiple times.
+			Writing in file :  Please note, we always pass the data as a string to write(). Other datatypes like int, dict will not work here.
+								file.write("This is written in write mode of python")  This can be written in multiple times.
+								file.writeline(L) -> by this we can add multiple paragraph into L(list) and then pass it to writeline. it will print multiple
 			
 		Best way to handle file is using with statement ->
 		
@@ -531,7 +535,78 @@ Files : Files is the data stored in a storage device. A pyhton file can read or 
 																data = file.read()
 																print(data)
 																						-> This does not require close function, as it is done automatically
-																						
+		Functions :
+					f.tell() -> it will tell on which position the cursor is in the file.
+					f.seek(5) -> it will move the cursor to the 5th character in the file.
+					
+	Serialization/Deserialization: We know, in python normally we can only work with string type data to write in files. 
+									To overcome this flaw, the concept of serialization and deserialization came into picture.
+									Serialization: Process of converting python data types to JSON format.
+									Deserialization: Process of converting JSON to python ddata types.
+									
+				JSON : JSON, which stands for JavaScript Object Notation, is a lightweight data interchange format. 
+						It is easy for humans to read and write and easy for machines to parse and generate. 
+						JSON data is represented as key-value pairs (like dict in python), where keys are strings and values can be strings, numbers, booleans, arrays, objects, or null. 
+					Code: 
+						import json
+
+						l = [1,2,4,5]
+						with open('dummy.json', 'w') as f:
+							json.dump(l, f)
+							
+						with open('dummy.json', 'r') as f:
+							print(json.load(f))
+						
+						JSON store tuples as a list in .json file. You can later do type conversion from list to tuple in code.
+						
+						To store the ojects of the class in JSON, we do as below
+							As it is custom objects, python does not know how to store that obj. so we need to tell python that store like this.
+								
+								class person:
+
+									def __init__(self, n, a, p):
+										self.name = n
+										self.age = a
+										self.place = p
+
+								obj = person('Arbaz', 33, 'Pune')
+
+								def obj_show(obj):
+									if isinstance(obj, person):
+										# return "Name: {} -> Age: {} -> Place: {}".format(obj.name, obj.age, obj.place) #as string
+										return {'Name': obj.name, 'Age': obj.age, 'Place': obj.place}
+									
+								with open('dummy.json', 'w') as f:
+									json.dump(obj, f, default=obj_show)
+									
+						Here, for storing custom object, we need to show python how to store it and this is done by storing it in string or list or dict or any predefine datatype. 
+							But if we want to store object as it is with its original form, we do it by pickling.
+									
+				Pickling : 	Pickling is the process of serializing and deserializing Python objects. 
+						It allows you to convert a Python object into a byte stream, which can then be stored in a file or sent over a network. 
+						The serialized byte stream can later be reconstructed(unpickling) to obtain the original Python object. 
+						This process is commonly used for data persistence and inter-process communication in Python.
+						The pickle module in Python provides a way to serialize and deserialize Python objects.
+						
+						As we are converting data into byte format means dealing with binary format, we open it by wb, rb etc.
+						
+					code :	
+						import pickle
+
+						# Example data (a dictionary)
+						data = {'name': 'John', 'age': 25, 'city': 'New York'}
+
+						# Serialize (pickling)
+						with open('data.pkl', 'wb') as file:
+							pickle.dump(data, file)
+
+						# Deserialize (unpickling)
+						with open('data.pkl', 'rb') as file:
+							loaded_data = pickle.load(file)
+
+						# Print the loaded data
+						print(loaded_data)
+						
 
 Modules :
 			Modules are simply the reusable code which we import in our programs. Its same as libraries in C.
@@ -591,14 +666,6 @@ OOPs Concepts :	Object oriented programming is a way that is used for efficiency
 																	print("salary is 100k")
 							
 					Always remember : function outside the class is called function. but the function inside the class is called as method.
-							
-					Two types of methods : static method and intance method.
-					
-					Static method : sometimes we need the function which does not use self parameter, we can define a static parameter like this:
-							 A static method is a method that belongs to the class rather than an instance of the class.It can be called on the class itself, without creating an instance of the class.			
-											@staticmethod
-											def getsalary():
-												print("salary is 100k")
 												
 			__init__() Constructor : Its a magic method/function a.k.a. dunder method.
 				(dunder method)		It is the special method which is first run as soon as the object is created. We don't need to call this method
@@ -629,7 +696,6 @@ OOPs Concepts :	Object oriented programming is a way that is used for efficiency
 							We can use methods and attributes of Employee in programmer object.
 							Also, we can overwrite or add new attributes and methods in programmer class.
 							
-							
 					Types of Inheritance : 
 						1. Single Inheritance : It occurs when child class inherits only one parent class.
 											Base -> derived
@@ -649,21 +715,41 @@ OOPs Concepts :	Object oriented programming is a way that is used for efficiency
 											class Programmer(Employee,Company):     -> derived class/ child class
 												#code
 												
-									Here if there is same method/attribute in both parents, child instance will take preference of first class written in child {} parenthesis over second.
+									Here if there is same method/attribute in both parents, child instance will take preference of first class written in child {} parenthesis over second. This is called as Method resolution order (MRO).
 						3. Multilevel Inheritance : When child class becomes the parent of another child class.		
+						4. Hirarchical Inheritance : 1 parent has many child.
+						5. Hybrid Inheritance : Mix of different type of Inheritance
 							
+					Constructor : IF chid has its own __init__ constructor, it will not call parent constructor and all the attribute in parent constructor will be inaccesible to child. To solve this problem we have super() method.
+					
 					Super() method :
-								super method is used to access the methods of super/parent class in derived class.  Mostly used for __init__ function calling
+								super method is used to access the methods of super/parent class in derived class.  Mostly used for __init__ Constructor calling. It is always used in the class and not outside the class. Super can only use for methods and not for attribute.
 								
 								E.g :   class Employee:
-											def __init__()
+											def __init__(self, a, b)
 											
 										class programmer(Employee):
-											super().__init__()       -> can access method of parent class.
+											def __init__(self, a, b, c, d)  -> here we are have method overriding so child __init__ will run. but we added super keyword, it will call it parent constructor.
+												super().__init__(a, b)       -> can access method of parent class.
 											
 											def method():
 												code
 												
+					Method / constructor overriding : Generally when parent and child has same methods, always child method is executed and parent method is ignored.
+												
+					Variable are of two types :
+												instance variable : this variable id dependent on object i.e self.name self.gender
+												static variable : this is the class variable which does not change with the object. and we initialize it using class_name.IFSC_code. 
+																	It is generally used where we want a permenent value which will not change acc. to obj. or where we have to increment the value by 1
+							
+					Two types of methods : static method and intance method.
+					
+					Static method : sometimes we need the function which does not use self parameter, we can define a static parameter like this:
+							 A static method is a method that belongs to the class rather than an instance of the class.It can be called on the class itself, without creating an instance of the class.			
+											@staticmethod
+											def getsalary():
+												print("salary is 100k")
+					
 					class methods :
 									Class method is a method which is bound to class and not an object of class.
 									@classmethod decorator is used to create a class method
@@ -679,8 +765,8 @@ OOPs Concepts :	Object oriented programming is a way that is used for efficiency
 								Public, Protected, and Private Attributes:
 
 										Public attributes/methods: Accessible from anywhere, both inside and outside the class.
-										Protected attributes/methods: Accessible within the class and its subclasses (denoted by a single leading underscore _).
-										Private attributes/methods: Accessible only within the class (denoted by a double leading underscore __).
+										Protected attributes/methods: Accessible within the class and its subclasses (denoted by a single leading underscore _). In python protected is just a concept and a conventionto show other programmer that please use this variable safely. Its don't have any logic use case.
+										Private attributes/methods: Accessible only within the class (denoted by a double leading underscore __). Child class also can't use private data of parent class.
 										
 								While it is technically possible to access private attributes using name mangling (_ClassName__private_attribute), it's generally discouraged as it goes against the principle of encapsulation.
 					
@@ -721,13 +807,48 @@ OOPs Concepts :	Object oriented programming is a way that is used for efficiency
 											#setter to set Yearbonus
 											e.TotalSalary = 600000
 											print(e.Yearbonus)   
-					
-					Operator overloading : Operator in python can be overloaded using dunder methods.
-											These methods are called when a given operator is used on the objects.
-											
-									Operators can be overloaded using the below dunder methods,
-												p1 + p2			->			p1.__add__(p2)
-											like this, *  -> __mul__    ;   -  -> __sub__  ; /  -> __truediv__
+				Polymorphism :
+								Method overriding : Both parent and child class have same methods. child will always execute its method.
+								Method overloading : It doesn't work in Python. It only works in java. In same class, we have more than one methods of same name. The methods will be differ by their input parameters. 
+													 If user passes 1 argument then it will go to method having 1 parameter. If user passes 2 arguments then it will go to method having 2 parameter.
+													 To work above logic in python, we can have only one method and in paramenter we can set default parameter value as 0. And in function we can check likewise.
+								Operator overloading : Operator in python can be overloaded using dunder methods.
+														These methods are called when a given operator is used on the objects.
+														
+												Operators can be overloaded using the below dunder methods,
+															p1 + p2			->			p1.__add__(p2)
+														like this, *  -> __mul__    ;   -  -> __sub__  ; /  -> __truediv__
+														
+												Also if check + sign . for different datatypes it bahaves different. 
+													for e.g  'arbaz' + 'khan' will give -> 'arbazkhan'
+															1 + 2 will give -> 3
+															[1,2,3] + [4,5] will give -> [1,2,3,4,5]
+
+				Abstractions : hiding the complex implementation details while exposing only the essential features of an object or system. The main goal of abstraction is to simplify the interaction with the system by providing a clear and concise interface.
+								Abstract classes allow you to define a high-level interface for a class, specifying what methods should be implemented without providing the actual implementation.
+								The concrete subclasses are responsible for providing the specific implementations of the abstract methods.
+							
+							@abstractmethod Decorator:
+
+										When a method in an abstract class is marked with the @abstractmethod decorator, it signals that any concrete subclass must provide an implementation for that method.
+										Abstract methods serve as a contract, defining a common interface that all subclasses must adhere to.
+									Code :	
+										from abc import ABC, abstractmethod
+
+										class Shape(ABC):
+											@abstractmethod
+											def area(self):
+												pass
+
+										class Circle(Shape):
+											def __init__(self, radius):
+												self.radius = radius
+		
+			Decorators : A decorator in python is the function that receives another functions as input and adds some fontionality to it and returns it.
+							This can happen only because python function is first class citizens.
+							There are two types of decorators :
+								Built in decorators : @staticmethod, @abstractmethod, @property, @classmethod, etc
+								User defined decorators that we programmers can create acc. to our need.
 											
 Exception handling : There are many build-in exceptions which are raised in python when something goes wrong.
 					Exception in python can be handled can be handled using a try statement. The code that handles the exception is written in except clause.
@@ -767,6 +888,23 @@ Exception handling : There are many build-in exceptions which are raised in pyth
 								exit()
 							finally:
 								#code 				-> This will always run irrespective to any exit method written in except clause. thia is mainly use to close any in progress file, or add some closing code before exiting.
+
+					Raise and exception is like throw and catch. We can add raise wherever we want and inside 'except exception as e' it will print.
+					
+					Custom exception classes : we use this classes when we need to add some other codes tu execute while exceptions.
+					
+					class MyException(Exception):
+						your code
+						
+					class abc:
+						error code
+							raise MyException
+							
+	Scopes : LEGB scope i.e Local -> Enclosing -> Global -> Builtin. Python will search for the name as per LEGB scope. 
+				Local: names inside function
+				Enclosing: If there is function inside a function, enclosing scope names are the names in outer function.
+				Global: user defined names of main python program
+				Builtin: Python built-in names/methods like error method, int, float.
 
 if __name__ == '__main__' in python :
 								__name__ evaulates to the name of the module in python from where the python program is ran.
@@ -828,6 +966,72 @@ Map, filter and reduce:
 								
 								If the function computes sum of 2 numbers and the list is [1,2,3,4]
 									It will do sum like (((1+2)+3)+4) and print. its called sequential computation.
+									
+Range class:
+
+	Iteration: It is general term of taking each item of something, one after the another. Any time you use the loop implicitly or explicity to go over a group of items, that is iteration.
+	Iterator: It is an object that allows programmer to traverse through the sequence of data without having to store the entire data in the memory.
+				For e.g. range class object: l2 = range(10000)
+						This is because a range object represents a sequence of numbers in a compact form without explicitly storing each individual element
+						range object in Python is more memory-efficient than a list, especially when dealing with large sequences of numbers.
+	Iterable: It is an object, which can traverse over.	It generates an iterator when passed to iter() method.
+				It can consist of list, tuple or range.
+			Remember : Every Iterator is Iterable but not all Iterable is Iterator
+
+		Then how we can find which is iterable and which is iterator:
+			Every Iterable has a iter function.
+			But every Itertor has iter function as well as next function also.
+			
+	Range is use when we have to deal with large amt of data and does not have enough memory, that time we can use range object to extract data one by one.
+
+Generators:
+			Python generators are a simple way of creating an iterators.			
+			Generators in Python are a way to create iterators with a more memory-efficient approach compared to traditional lists. They allow you to iterate over a potentially large sequence of data without loading the entire sequence into memory. Generators are defined using functions with the yield keyword.
+
+			Here's a simple example of a generator function:
+
+			python
+			Copy code
+			def simple_generator():
+				yield 1
+				yield 2
+				yield 3
+
+			# Using the generator
+			gen = simple_generator()
+
+			for value in gen:
+				print(value)
+			In this example, simple_generator is a generator function that yields three values (1, 2, and 3). When you iterate over the generator using a for loop, it produces each value one at a time.
+		Key characteristics of generators:
+
+		Lazy Evaluation: Values are generated one at a time as needed, rather than creating a complete list of all values at once.
+
+		Memory Efficiency: Generators use memory efficiently since they only produce the next value when requested.
+
+		Stateful: Generator functions retain their state between calls, allowing them to resume execution where they left off.
+
+		Infinite Sequences: Generators can represent infinite sequences since they generate values on-the-fly.
+
+			Here's an example of a generator that produces an infinite sequence of even numbers:
+
+			python
+			Copy code
+			def infinite_even_numbers():
+				i = 0
+				while True:
+					yield i
+					i += 2
+
+			# Using the infinite generator
+			even_gen = infinite_even_numbers()
+
+			# Print the first 5 even numbers
+			for _ in range(5):
+				print(next(even_gen))
+			In this example, the infinite_even_numbers generator produces an infinite sequence of even numbers, and the next() function is used to retrieve the next value from the generator.
+
+	Generators are commonly used in situations where you need to process large datasets, iterate over elements one at a time, or generate values dynamically without precomputing an entire sequence.
 						
 Virtual Environment: An environment which is same as system interpreter but is isolated from other python environment on the system.
 
@@ -864,4 +1068,4 @@ Data structure : It is a way to store and organized data efficiently.
 			Disadvantage : 1. Fixed size (Memory Wastage)
 						   2. Homogenuous (different types can't be store)(lack of flexibility)
 						   
-		Lists are the referencial array i.e lists stores the addresses of heterogenuous data in sequential manner.
+		Lists are the referencial array 
