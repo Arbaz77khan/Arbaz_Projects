@@ -63,7 +63,101 @@ Input : It takes the input from user. (Its type is always string)
 				print(a)
 				print(type(a)) <- Always a string...
 				
+		for multiple inputs in single line we can use below code:
+			num1, num2, num3 = map(int,input("Enter 3 digit seperated by space: ").split())
+			print(num1+num2+num3)
+				
 ----------In Python index value starts with 0 --------------
+			
+if-elif :  If else if statements.
+			Syntax:
+					if(a>3):
+						print("hi")
+					elif(a==7):
+						print("here")    
+					else:
+						print("you")
+			
+					if(a>3):
+						print("this")
+						
+	Ternary conditional operator:	you can write an if-else statement in a single line using what is known as a ternary conditional operator. 
+									The syntax for the ternary conditional operator is:
+										result = "Greater than 10" if x > 10 else "Less than or equal to 10"
+										print(result)
+	
+Operators:
+
+	Arithmetric operators: 
+							+, -, *, / -> division, // -> integer division (i.e if the answer will be rouded off to an integer), % -> modulus (i.e it will divide and give you the remainder as answer), ** -> power-of operator ( i.e 5**2 is same as we write 5 raised to 2)
+	
+	Relational Operators:
+							> , < , !=
+							==  -> equals to
+							>=  -> greater than equal to
+							<=  -> less than equal to
+	Logical operators:
+						and -> True True = True O.W False
+						or -> False False = False O.W True
+						not -> True will be false and False will be true.
+						
+	Bitwise operator: 
+						& -> bitwise and 
+						| -> bitwise or
+						~ -> bitwise not 
+						^ -> bitwise XOR - exclusive OR - 1 1 = 0 , 0 0 = 0 , 1 0 = 1 , 0 1 = 1
+						<< -> bitwise left shift( adding 0 to left) : 0101 -> 1010 
+						>> -> bitwise right shift ( adding 0 to right and removing any from left) : 0101 -> 0010
+						
+	Memembership operators: 
+							in / not in -> it use for finding any in string, tuple, dict
+							
+						
+While Loop : Syntax:
+
+			i = 10
+
+			while(i>0):
+				print("Yes" + str(i))
+				i = i - 1
+				
+	You can also add else statement in while loop :
+	
+			else:
+				print("limit crossed")
+				
+				
+For loop :  Syntax:
+			l = [1,2,3,4,5,6,7,8,9]
+
+			for i in l:                      
+				print("Yes" + str(i))
+				
+		In range format:
+			for i in range(8):  -> range can have various values like : range(start, stop, step-size)
+			print(i)
+			
+			for i in range(2, 11, 2):      #range(start, stop, step-size)  
+			print(i)
+			
+		For loop with else:
+			In for loop else statement will execute once for loop is exhausted.
+			
+			for i in range(8):
+				print(i)
+			else:
+				print("end")
+				
+		break/continue statement:
+		
+			for i in range(8):
+				print(i)
+				if i == 3:
+					break   (continue  -> it will exit current loop task and go for parrent loop task.)
+					
+		Pass statement :
+			
+			pass keyword is same as "do nothing"
 
 Ascii code : earlier systems were using 8 bit for storing data that means only upto maximum 256 bits can be use to store values, which can only store some aplhabets and numbers. So this fails in modern days.
 Unicode : now unicode has came which has 16 bits and this can store any aplhabets, numbers, emojis, any language letters.
@@ -112,7 +206,7 @@ List: index value starts from 0
 		a.insert(indexposition, newitem) - can add new item into desired location
 		
 		deleting item from list using index position : del a or del a[1]
-		remove item from list using item : a.remove(2)
+		remove item from list using value : a.remove(2)
 		pop -> a.pop() will delete last item. if a.pop(1) will delete with index.
 		clear -> will clear the list and make list as empty list -> a.clear()
 		
@@ -299,92 +393,7 @@ Set : It is a collecction of non repitative(unique,no duplicates) elements.
 				All set operations will work here.
 				All read function will work
 				All write function will not work.
-				
-			
-if-elif :  If else if statements.
-			Syntax:
-					if(a>3):
-						print("hi")
-					elif(a==7):
-						print("here")    
-					else:
-						print("you")
-			
-					if(a>3):
-						print("this")
-Operators:
-
-	Arithmetric operators: 
-							+, -, *, / -> division, // -> integer division (i.e if the answer will be rouded off to an integer), % -> modulus (i.e it will divide and give you the remainder as answer), ** -> power-of operator ( i.e 5**2 is same as we write 5 raised to 2)
-	
-	Relational Operators:
-							> , < , !=
-							==  -> equals to
-							>=  -> greater than equal to
-							<=  -> less than equal to
-	Logical operators:
-						and -> True True = True O.W False
-						or -> False False = False O.W True
-						not -> True will be false and False will be true.
-						
-	Bitwise operator: 
-						& -> bitwise and 
-						| -> bitwise or
-						~ -> bitwise not 
-						^ -> bitwise XOR - exclusive OR - 1 1 = 0 , 0 0 = 0 , 1 0 = 1 , 0 1 = 1
-						<< -> bitwise left shift( adding 0 to left) : 0101 -> 1010 
-						>> -> bitwise right shift ( adding 0 to right and removing any from left) : 0101 -> 0010
-						
-	Memembership operators: 
-							in / not in -> it use for finding any in string, tuple, dict
 							
-						
-While Loop : Syntax:
-
-			i = 10
-
-			while(i>0):
-				print("Yes" + str(i))
-				i = i - 1
-				
-	You can also add else statement in while loop :
-	
-			else:
-				print("limit crossed")
-				
-				
-For loop :  Syntax:
-			l = [1,2,3,4,5,6,7,8,9]
-
-			for i in l:                      
-				print("Yes" + str(i))
-				
-		In range format:
-			for i in range(8):  -> range can have various values like : range(start, stop, step-size)
-			print(i)
-			
-			for i in range(2, 11, 2):      #range(start, stop, step-size)  
-			print(i)
-			
-		For loop with else:
-			In for loop else statement will execute once for loop is exhausted.
-			
-			for i in range(8):
-				print(i)
-			else:
-				print("end")
-				
-		break/continue statement:
-		
-			for i in range(8):
-				print(i)
-				if i == 3:
-					break   (continue  -> it will exit current loop task and go for parrent loop task.)
-					
-		Pass statement :
-			
-			pass keyword is same as "do nothing"
-			
 Funtions: It is a block of code which we can reuse in future programming.
 			Syntax : def funct():
 						//write reusable code here

@@ -1,0 +1,110 @@
+************************************************Data Science**********************************************************
+
+Numpy package in array:	NumPy is a fundamental package for scientific computing with Python. 
+						It provides support for arrays, matrices, and a wide range of mathematical functions to operate on these arrays. 
+						NumPy stands for Numerical Python.
+							import numpy as np
+	Functions:
+		Arrays:	A NumPy array is a fundamental data structure in the NumPy library, which is a powerful Python library for numerical computing. NumPy arrays are similar to Python lists, but they provide more efficient storage and operations for numerical data.
+				NumPy arrays are created using the numpy.array() function, and once created, they can be manipulated using various array manipulation functions provided by the NumPy library.
+				a = np.array([1,2,3])
+				
+		arange:	arange function in numpy is same as range function in python.
+				e = np.arange(1, 11)
+				
+		reshape:	It will change the dimension acc. to given values. If not possible it will throw error.
+					f = np.arange(1, 13).reshape(3, 4)
+
+		Ones/ Zeros/ Random:	To initialize the array.
+								g = np.ones((2,3))
+								h = np.zeros((2,3))
+								i = np.random.random((2,3))
+								
+		linspace:	It will create an array of item which are equidistance within the range.
+					j = np.linspace(1, 10, 4) #lower range, upper range, number of items
+					
+		Identity:	Diagonal items are 1 and rest 0
+					k = np.identity(3)
+	Attributes:
+		ndim:	It will show which dimension the array is.
+		shape:	It will show number of rows and columns here.
+		size:	It will show size of array.
+		itemsize:	It will show size/memory of item.
+		dtype:	It will show type of array.
+	
+	Changing Datatype:
+		astype:	If we want to reduce the size of array
+				a.astype(np.int64)
+	
+	Operations:
+		Scalar: We can apply arithmetic operations to this array.
+			a1*2, a1+2....
+		Relational: >, <, ==
+		Vector: when we apply some operation in between two numpy array.
+			a1 + a2
+			
+	Functions:
+		max/ min/ sum/ prod:	np.max(a1), sum/prod will add/multiply all item in array
+		mean/ median/ std/ var:	All statistical operations.
+		axis=0(column) axis=1(row): If we want to apply function on particular row or column. 
+									This applies for all above function.
+									np.max(a1, axis=0)
+		Trigonometric:	sin, cos, tan
+		Dot product:	Multiply first row of a1 to first column of a2 and do sum of it. Same for rest. Output will be first and last value dim of arrays. 
+						3X4 dot 4X3 results 3X3
+						np.dot(a1,a2)
+		Log/ Exponent: np.log(a1) or np.exp(a1)
+		round/ floor/ ceil:	round will round off the value to nearest integer. floor will round off to previous integer. Ceil will round off to next integer.
+	
+	Indexing:	We can access 1 item of an array using index.
+		1D array:	a1[nth position] or a1[-1] for last item
+		2D array:	a2[row, column]
+		3D array:	a3[2DarrayPosition, row, column]
+		
+	Slicing:	We can acces a series of items of an array using Slicing.
+		1D array:	a1[StartPosition: EndPosition(non included)].		e.g.	a1[0,3] = 0,1,2
+		2D array:	a2[row_StartPosition: EndPosition(non included): step, column_StartPosition: EndPosition(non included): step]		e.g.	a2[::2,1::2]
+		3D array:	a3[2DarrayPosition,2D slicing]
+		If we want any entire row or column, we can also write ':'
+		
+	Fancy indexing:	In some case we can't use slicing (for e.g. we need to acces 1,3,4 rows). At that time we use Fancy indexing.
+					We include row/column position that we want.
+					a[[0,2,3]] -> row 0,2,3 will be displayed
+					a[:,[0,2,3]] -> all row, coumn 0,2,3 will be displayed.		
+					
+	Boolean indexing:	This type of indexing is used when we need to implement some arithmetic condition in it. Why we call Boolean : When we implement logic, we get a boolean value and that we mask on actaul array.
+		e.g.	show all numbers greater than 50. ->	a[a > 50]
+				Show all numbers which are even ->	a[a%2 == 0]
+				
+			Whenever we work with boolean value, we always use bitwise operators.
+	
+	Iteration:	We can iterate numpy array items using for loop
+		for i in a1:
+			print(i)	-> this will print each set i,e if 1D then each item. if 2D then each row. if 3D then each 2Darray
+		If need each element:
+			for i in np.nditer(a3):
+				print(i)
+				
+	Transpose:	row-coulmn will change to column-row
+		np.transpose(a2)	or a2.T
+		
+	ravel: It will convert any dimensional array to 1D array
+		a3.ravel()
+		
+	Stacking:	It will join the array horizontal or vertical. Shape should be same!
+		np.hstack((a1,a2)) will join horizontal
+		np.vstack((a1,a2,a3)) will join vertical
+		
+	splitting:	It will split the array h or v. Spliting value should be feasible.
+		np.hsplit(a1,2) will slipt a1 array into 2 array horizontally
+		np.vsplit(a1,3) will slipt a1 array into 3 array Vertically
+		
+		
+	Broadcasting:	The term broadcasting describes how NumPy treats arrays with different shapes during arithmetic operations.
+					The smaller array is broadcasted across the larger array so that they have compatible shapes.
+		Broadcasting Rules:	
+			1.	Make the two arrays have the same number of dimensions.
+				.	If the number of dimensions of two arrays are different, add a new dimension with size 1 to the head of an array with the smaller dimension.
+			2.	Make each dimension of two arrays the same size.
+				.	If the sizes of each dimension of the two arrays do not match, dimensions with size 1 are stretched to the size of an other array.
+				.	If there is a dimension whose size is not 1 in either of two arrays, it cannot be broadcasted, and it will throw an error.

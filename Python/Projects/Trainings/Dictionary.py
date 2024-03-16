@@ -39,3 +39,11 @@ print(MyDict)
 print(MyDict.get('apple')) 
 
 print(MyDict['apple'])
+
+s = 'apple'
+if s in MyDict:
+    print(True)
+else:
+    print(False)
+
+print(MyDict['bag'])

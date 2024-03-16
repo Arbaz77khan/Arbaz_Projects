@@ -19,4 +19,4 @@ class Solution(object):
 
 object = Solution()
 
-print(object.romanToInt("IV"))
+print(object.romanToInt("LXVIII"))
